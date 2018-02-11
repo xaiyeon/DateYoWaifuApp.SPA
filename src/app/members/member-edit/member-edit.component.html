@@ -1,0 +1,91 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h1>Edit Profile</h1>
+    </div>
+    <div class="col-sm-8">
+      <div class="alert alert-info draw" [hidden]="!editForm.dirty" >
+        <p>
+          <strong>Information: </strong> Master! You have unsaved ch-cha changes!</p>
+      </div>
+    </div>
+
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-default tab-panel">
+        <img class="img-thumbnail" src="{{photoUrl}}" alt="{{user?.knownAs}}">
+        <div class="panel-body">
+          <div>
+            <strong>Location: </strong>
+            <p>{{user?.city}}, {{user?.country}}</p>
+          </div>
+          <div>
+            <strong>Age: </strong>
+            <p>{{user?.age}}</p>
+          </div>
+          <div>
+            <strong>Last Active: </strong>
+            <p>{{user?.lastActive | timeAgo }}</p>
+          </div>
+          <div>
+            <strong>Member Since: </strong>
+            <p>{{user?.dateCreated | date}}</p>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="btn-group-justified">
+            <div class="btn-group">
+              <button class="btn btn-danger" [disabled]="!editForm.dirty" form="editForm" (click)="ResetForm()" >Clear</button>
+              <!-- Disable button if form change -->
+              <button  [disabled]="!editForm.dirty" form="editForm" class="btn btn-success">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-8">
+      <!-- Nav tabs -->
+      <div class="tab-panel">
+        <tabset>
+          <tab heading="Edit Profile" id="tab1">
+            <div style="padding-top: 1em;"></div>
+
+            <!-- Start of our Form, by giving id editForm and button editForm they now tie together -->
+            <form #editForm="ngForm" id="editForm"  (ngSubmit)="updateUserProfile()" >
+              <h4>Description</h4>
+              <textarea name="introduction" rows="10" class="form-control" [(ngModel)]="user.introduction"></textarea>
+              <h4>Looking For: </h4>
+              <textarea name="lookingFor" rows="10" class="form-control" [(ngModel)]="user.lookingFor"></textarea>
+              <h4>Interests: </h4>
+              <textarea name="interests" rows="10" class="form-control" [(ngModel)]="user.interests"></textarea>
+
+              <hr>
+
+              <h4>Location Details: </h4>
+
+              <div class="form-inline">
+                <label for="city">City: </label>
+                <input class="form-control" type="text" name="city" [(ngModel)]="user.city">
+                <label for="country">Country: </label>
+                <input class="form-control" type="text" name="country" [(ngModel)]="user.country">
+              </div>
+            </form>
+          </tab>
+          <tab heading="Edit Photos">
+            <app-photo-editor [photos]="user.photos" (getMemberPhotoChange)="updateMainPhoto($event)" ></app-photo-editor>
+          </tab>
+        </tabset>
+      </div>
+
+    </div>
+
+    <div class="dyw-editpadding">
+      .
+    </div>
+
+  </div>

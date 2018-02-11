@@ -1,0 +1,16 @@
+.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+
+.dyw-well {
+    border: 2px solid black; 
+    padding: 10px 10px 10px 10px;
+    cursor: pointer;
+}
+
+.dyw-image {
+    width: 200px;
+    height: 160px;
+}
+
+input[type="file"] {
+    color: transparent;
+}

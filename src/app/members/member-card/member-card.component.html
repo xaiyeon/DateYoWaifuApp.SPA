@@ -1,0 +1,58 @@
+<!--Panel-->
+<div class="card dyw-padding">
+  <h4 *ngIf="user.gender == 'male'" class="card-header primary-color white-text"><i class="fa fa-user">
+  </i> New <i *ngIf="user.gender == 'male'">Husbando</i>
+  </h4>
+  <h4 *ngIf="user.gender == 'female'" class="card-header dyw-pink-color  white-text"><i class="fa fa-user">
+  </i> New <i *ngIf="user.gender == 'female'">Waifu</i>
+  </h4>  
+
+  <div class="card-body hvr-underline-from-right">
+      <div class="panel-image">
+        <!-- Terniary operator for setting photos, we will use an if statement instead -->
+        
+        <div *ngIf="user.profileImageURL; else defaultImage">
+            <div class="cover-image hvr-overline-from-left" [ngStyle]="{'background-image': 'url(' + user.profileImageURL + ')'}">
+          
+            </div>
+        </div>
+        
+        <ng-template #defaultImage>
+            <div class="cover-image hvr-overline-from-left" [ngStyle]="{'background-image': 'url(' + '../../../assets/images/user_def.gif ' + ')'}">
+          
+            </div>
+        </ng-template>
+
+        <!-- Custom hover menu -->
+        <ul class="list-inline member-icons animate">
+          <li><button class="btn btn-primary"  [routerLink]="['/members', user.id]" ><i class="fa fa-user"></i> </button></li>
+          <li><button class="btn btn-danger"><i class="fa fa-heart"></i> </button></li>
+          <li><button class="btn btn-primary"><i class="fa fa-envelope"></i> </button></li>
+        </ul>
+      </div>
+      <hr>
+      <center>
+      <div class="card-text hvr-grow">
+        <div class="text-center">
+          <h5><i *ngIf="user.gender == 'female'" class="fa fa-venus"></i> <i *ngIf="user.gender == 'male'" class="fa fa-mars"></i>  {{user.knownAs | shorten}}, {{user.age}} </h5>
+          <h6><i class="fa fa-flag"></i> {{user.ethnicity | capitalizeFirst}}</h6>
+        </div>
+        <div class="text-center ">
+              <h5> <i class="fa fa-globe"></i> {{user.city}}, {{user.country}}</h5>
+        </div>
+      </div>
+    </center>
+  </div>
+
+  <div class="card-footer text-muted waves-light white-text">
+      <a class="btn btn-primary waves-light" mdbRippleRadius>Hit Up!</a>
+      <a id="wikiButton" class="btn btn-info waves-light" mdbRippleRadius>Wiki</a>
+      <hr>
+      <div class="text-center">
+          <small class="text-muted hvr-grow">Last Active: {{user.lastActive | timeAgo}}</small>
+      </div>
+  </div>
+  
+</div>  
+<!--/.Panel-->
+<!--  -->

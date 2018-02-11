@@ -1,0 +1,172 @@
+<mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark bg-black scrolling-navbar" [containerInside]="false">
+  <logo>
+    <a class="logo navbar-brand" [routerLink]="['/home']">
+      <strong>DateYoWaifu!</strong>
+    </a>
+  </logo>
+  <links class="align-middle">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active waves-light" mdbRippleRadius routerLinkActive="active">
+        <a [routerLink]="['/waifus']" class="nav-link">Waifus</a>
+      </li>
+      <li class="nav-item waves-light" mdbRippleRadius *ngIf="loggedIn()" routerLinkActive="active">
+        <a [routerLink]="['/members']" class="nav-link">Matches</a>
+      </li>
+      <li class="nav-item waves-light" mdbRippleRadius *ngIf="loggedIn()" routerLinkActive="active">
+        <a [routerLink]="['/lists']" routerLinkActive="router-link-active" class="nav-link">Lists</a>
+      </li>
+      <li class="nav-item waves-light" mdbRippleRadius *ngIf="loggedIn()" routerLinkActive="active">
+        <a [routerLink]="['/messages']" class="nav-link">Messages</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav nav-flex-icons">
+      <li class="nav-item waves-light" mdbRippleRadius>
+        <a class="nav-link">
+          <i class="fa fa-facebook"></i>
+        </a>
+      </li>
+      <li class="nav-item waves-light" mdbRippleRadius>
+        <a class="nav-link">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+      <li class="nav-item waves-light" mdbRippleRadius>
+        <a class="nav-link">
+          <i class="fa fa-instagram"></i>
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav" *ngIf="loggedIn()">
+      <!-- Dropdown for logged in USERS only -->
+      <li>
+        <img class=" dyw-img-border" src="{{photoUrl}}" alt="{{authService.currentUser.knownAs}}">
+      </li>
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
+          Welcome {{ authService.decodedToken?.unique_name | titlecase}}
+          <span class="caret"></span>
+        </a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item" [routerLink]="['/member/edit']">Edit Profile</a>
+          <a (click)="logout()" class="dropdown-item" href="#">Logout</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li *ngIf="!loggedIn()">
+        <!-- Later we want to hide this when a user logins -->
+        <button type="button" class="btn btn-sm btn-outline-secondary waves-light" (click)="form.show()" mdbRippleRadius>Login / Register form</button>
+      </li>
+    </ul>
+
+  </links>
+
+</mdb-navbar>
+
+<!--Modal: Login / Register Form-->
+<div mdbModal #form="mdb-modal" class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog cascading-modal" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Modal cascading tabs-->
+      <div class="modal-c-tabs">
+
+        <!-- Tab panels -->
+        <mdb-tabset #staticTabs [buttonClass]="'nav nav-tabs tabs-2 light-blue darken-3'" [contentClass]="''" class="tab-content">
+          <!--Panel 7-->
+          <mdb-tab class="tab-pane fade in show active" id="panel7" role="tabpanel" heading="<i class='fa fa-user mr-1'></i> Login">
+            <!-- MY FORM TIED TO ANGULAR, now we can bind control to our component, now we are binding, Look at the form controls -->
+            <form #loginForm="ngForm" (ngSubmit)="login()">
+              <!-- Form Body-->
+              <div class="modal-body mb-1">
+                <div class="md-form form-sm">
+                  <i class="fa fa-user prefix"></i>
+                  <input mdbActive type="text" id="form22" class="form-control" required name="Username" [(ngModel)]="model.Username">
+                  <label for="form22">Your username</label>
+                </div>
+
+                <div class="md-form form-sm">
+                  <i class="fa fa-envelope prefix"></i>
+                  <input mdbActive type="text" id="form23" class="form-control" name="Email" [(ngModel)]="model.Email">
+                  <label for="form23">Your email</label>
+                </div>
+
+                <div class="md-form form-sm">
+                  <i class="fa fa-lock prefix"></i>
+                  <input mdbActive type="password" id="form24" class="form-control" required name="Password" [(ngModel)]="model.Password">
+                  <label for="form24">Your password</label>
+                </div>
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-info waves-light" mdbRippleRadius [disabled]="!loginForm.valid">Log in
+                    <i class="fa fa-sign-in ml-1"></i>
+                  </button>
+                </div>
+              </div>
+              <!--Footer USING THIS ONE FOR REGISTER -->
+              <div class="modal-footer display-footer">
+                <div class="options text-center text-md-right mt-1">
+                  <p>Not a member?
+                    <a class="blue-text" (click)="registerToggleClick()">Sign Up</a>
+                  </p>
+                  <p>Forgot
+                    <a href="#" class="blue-text">Password?</a>
+                  </p>
+                </div>
+                <button type="button" class="btn btn-outline-info ml-auto" data-dismiss="modal" (click)="form.hide()" mdbRippleRadius>Close</button>
+              </div>
+            </form>
+          </mdb-tab>
+          <!--/.Panel 7-->
+
+          <!--Panel 8-->
+          <mdb-tab class="tab-pane fade" id="panel8" role="tabpanel" heading="<i class='fa fa-user-plus mr-1'></i> Register">
+
+            <!--Body-->
+            <div class="modal-body">
+              <div class="md-form form-sm">
+                <i class="fa fa-envelope prefix"></i>
+                <input mdbActive type="text" id="form25" class="form-control">
+                <label for="form25">Your email</label>
+              </div>
+
+              <div class="md-form form-sm">
+                <i class="fa fa-lock prefix"></i>
+                <input mdbActive type="password" id="form26" class="form-control">
+                <label for="form26">Your password</label>
+              </div>
+
+              <div class="md-form form-sm">
+                <i class="fa fa-lock prefix"></i>
+                <input mdbActive type="password" id="form27" class="form-control">
+                <label for="form27">Repeat password</label>
+              </div>
+
+              <div class="text-center form-sm mt-2">
+                <button class="btn btn-info waves-light" mdbRippleRadius>Sign up
+                  <i class="fa fa-sign-in ml-1"></i>
+                </button>
+              </div>
+
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+              <div class="options text-right">
+                <p class="pt-1">Already have an account?
+                  <a href="#" class="blue-text">Log In</a>
+                </p>
+              </div>
+              <button type="button" class="btn btn-outline-info ml-auto" data-dismiss="modal" (click)="form.hide()" mdbRippleRadius>Close</button>
+            </div>
+          </mdb-tab>
+          <!--/.Panel 8-->
+        </mdb-tabset>
+
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: Login / Register Form-->

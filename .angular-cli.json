@@ -22,11 +22,21 @@
         "../node_modules/font-awesome/scss/font-awesome.scss",
         "../node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
         "../node_modules/angular-bootstrap-md/scss/mdb-free.scss",
-        "styles.css"
+        "../node_modules/bootstrap/scss/bootstrap.scss",
+        "../node_modules/alertifyjs/build/css/alertify.min.scss",
+        "../node_modules/alertifyjs/build/css/themes/bootstrap.min.scss",
+        "../node_modules/hover.css/scss/hover.scss",
+        "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss",
+        "styles.scss"
       ],
       "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/popper.js/dist/popper.js",
         "../node_modules/chart.js/dist/Chart.js",
-        "../node_modules/hammerjs/hammer.min.js"
+        "../node_modules/hammerjs/hammer.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js",
+        "../node_modules/bootstrap/js/src/tab.js",
+        "../node_modules/alertifyjs/build/alertify.min.js"
 
       ],
       "environmentSource": "environments/environment.ts",
