@@ -61,13 +61,14 @@
       <app-member-card [user]="user"></app-member-card>
     </div>
   </div>
+
   <hr>
 
   <div class="row d-flex">
     <div class="col-lg-8">
       <div class="text-center">
         <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage" [(ngModel)]="pagination.currentPage"
-          (pageChanged)="pageChanged()" class="pagination-sm" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+          (pageChanged)="pageChanged()" class="pagination-m" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
           lastText="&raquo;"></pagination>
       </div>
     </div>

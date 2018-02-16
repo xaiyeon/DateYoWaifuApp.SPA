@@ -1,0 +1,23 @@
+table {
+    margin-top: 15px;
+    }
+    
+    .img-circle {
+    max-height: 50px;
+    }
+    
+    .table > tbody > tr > td {
+    vertical-align: middle;
+    }
+
+.cover-image
+{
+    padding-top: 6px;
+    height: 120px;
+    width: 120px;
+    max-width: auto;
+    display: block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

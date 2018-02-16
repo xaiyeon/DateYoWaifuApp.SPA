@@ -47,6 +47,6 @@ export interface User {
 // public DateTime LastEdit { get; set;}
 // public DateTime LastActive { get; set;}
 
-// // Don't use relationship collections in Dto 
+// // Don't use relationship collections in Dto
 // // This is a relationship, a one to many
 // public ICollection<Photo> Photos { get; set;}

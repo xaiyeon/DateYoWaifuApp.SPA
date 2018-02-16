@@ -27,6 +27,7 @@
         "../node_modules/alertifyjs/build/css/themes/bootstrap.min.scss",
         "../node_modules/hover.css/scss/hover.scss",
         "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss",
+        "../node_modules/balloon-css/src/balloon.scss",
         "styles.scss"
       ],
       "scripts": [

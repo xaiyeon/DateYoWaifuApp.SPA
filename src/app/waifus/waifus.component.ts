@@ -14,15 +14,15 @@ export class WaifusComponent implements OnInit {
   constructor(private userService: UserService, private alertify: AlertifyService) { }
 
   ngOnInit() {
-    this.loadUsers();
+    // this.loadUsers();
   }
 
   // Might need to fix...
-  loadUsers() {
-    this.userService.getUsers().subscribe((users: User[] ) => {
-      this.users = users;
-    }, error => {
-      this.alertify.error(error);
-    });
-  }
+  // loadUsers() {
+  //   this.userService.getUsers().subscribe((users: User[] ) => {
+  //     this.users = users;
+  //   }, error => {
+  //     this.alertify.error(error);
+  //   });
+  // }
 }

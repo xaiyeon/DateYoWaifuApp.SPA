@@ -1,3 +1,5 @@
+// For the list of like
+
 import { Resolve } from "@angular/router";
 import { User } from '../_models/User';
 import { Injectable } from "@angular/core";
@@ -9,17 +11,18 @@ import { Observable } from "rxjs/Rx";
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class MemberListResolver implements Resolve<User[]> {
+export class MemberLikeListResolver implements Resolve<User[]> {
     // Pagination
     pageSize = 2;
     pageNumber = 1;
+    likesParam = 'Likers';
 
 
-    constructor(private userservice: UserService, private router: Router, 
+    constructor(private userservice: UserService, private router: Router,
         private alertiy: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
-        return this.userservice.getUsers(this.pageNumber, this.pageSize)
+        return this.userservice.getUsers(this.pageNumber, this.pageSize, null, this.likesParam)
         .catch(error => {
             this.alertiy.error('Master, Master, where is the data?');
             this.router.navigate(['/home']);

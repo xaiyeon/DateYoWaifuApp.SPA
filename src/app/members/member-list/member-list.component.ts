@@ -1,22 +1,23 @@
-import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../_services/user.service";
-import { AlertifyService } from "../../_services/alertify.service";
-import { error } from "selenium-webdriver";
-import { User } from "../../_models/User";
-import { Router } from "@angular/router";
-import { ActivatedRoute } from "@angular/router";
-import { Pagination, PaginatedResult } from "../../_models/pagination";
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../_services/user.service';
+import { AlertifyService } from '../../_services/alertify.service';
+import { error } from 'selenium-webdriver';
+import { User } from '../../_models/User';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Pagination, PaginatedResult } from '../../_models/pagination';
 
 @Component({
-  selector: "app-member-list",
-  templateUrl: "./member-list.component.html",
-  styleUrls: ["./member-list.component.scss"]
+  selector: 'app-member-list',
+  templateUrl: './member-list.component.html',
+  styleUrls: ['./member-list.component.scss']
 })
 export class MemberListComponent implements OnInit {
   users: User[];
   pagination: Pagination;
 
-  // For filtering
+  // For filtering,
+  // TODO: include bisexual and nonbinary as well
   user: User = JSON.parse(localStorage.getItem('user'));
   genderList = [{ value: 'male', display: 'Males'}, { value: 'female', display: 'Females'}];
   userParams: any = {};
@@ -36,16 +37,16 @@ export class MemberListComponent implements OnInit {
       this.pagination = data['users'].pagination;
     });
 
-    //this.loadUsers();
+    // this.loadUsers();
     // pagination
     // Edit this, same as API
     this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
-    this.userParams.minAge = 18;
-    this.userParams.maxAge = 999999;
+    this.userParams.minAge = 14;
+    this.userParams.maxAge = 9999;
     this.userParams.orderBy = 'lastActive';
 
   }
-  
+
   // This will be used for our API
   pageChanged(event: any): void {
     // console.log('Page changed to: ' + event.page);
@@ -65,7 +66,7 @@ export class MemberListComponent implements OnInit {
       }
     );
   }
-  
+
   // resets to default
   resetFilters() {
     this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';

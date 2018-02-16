@@ -103,10 +103,13 @@ export class RegisterComponent implements OnInit {
       this.user = Object.assign({}, this.registerForm.value);
       //console.log(this.user);
       this.authservice.register(this.user).subscribe( () => {
-        this.alertify.success('Master! I am in your care!');
+        this.alertify.success('Master! You registered; I am in your care!');
       }, error => {
         this.alertify.error(error);
       }, () => {
+        // success then hide register form and reset
+        this.registerToggle = false;
+        this.globalDataService.changeRegisterMode(this.registerToggle);
         this.authservice.login(this.user).subscribe(() => {
           this.router.navigate(['/members']);
         });

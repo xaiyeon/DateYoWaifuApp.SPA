@@ -1,0 +1,22 @@
+.dyw-chat-window {
+    overflow-y: scroll;
+    height: 620px;
+}
+
+.dyw-img {
+    width: 100px;
+    height: 100px;
+}
+
+.dyw-chat-message {
+    padding: 5px 5px 5px 5px;
+}
+
+.dyw-sender {
+    border: 3px solid rgba(0,0, 10, 0.4);
+}
+
+.dyw-receiver {
+    border: 3px solid rgba(30,120, 250, 0.4);
+}
+

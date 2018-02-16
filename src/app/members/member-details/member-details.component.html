@@ -29,8 +29,8 @@
         <div class="panel-footer">
           <div class="btn-group-justified">
             <div class="btn-group">
-              <button class="btn btn-danger">Like</button>
-              <button class="btn btn-primary">Message</button>
+              <button class="btn btn-danger" (click)="sendLike(user.id)">Like</button>
+              <button class="btn btn-primary" (click)="selectTab(3)">Message</button>
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@
   <div class="col-sm-8">
   <!-- Nav tabs -->
   <div class="tab-panel">
-      <tabset>
+      <tabset #memberTabs>
         <tab heading="About" id="tab1">
           <h4>Description</h4>
           <p>{{user?.introduction}}</p>
@@ -58,13 +58,7 @@
           </div>
         </tab>
         <tab heading="Messages">
-            <p>Messages go here.</p>
-          </tab>
-        <tab (select)="alertMe()">
-          <ng-template tabHeading>
-            <span class="badge badge-secondary">Click here!</span>
-          </ng-template>
-          I've got an HTML heading, and a select callback. Pretty cool!
+            <app-member-simple-chat [userId]="user.id"></app-member-simple-chat>
         </tab>
       </tabset>
     </div>

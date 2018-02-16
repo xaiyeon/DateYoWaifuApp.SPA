@@ -1,0 +1,38 @@
+<div class="fluid-container">
+  <div class="row">
+    <div class="col-lg-12">
+      <button class="btn btn-primary" [(ngModel)]="likesParam" btnRadio="Likers" (click)="loadUsers()">Received Hearts</button>
+      <button class="btn btn-primary" [(ngModel)]="likesParam" btnRadio="Likees" (click)="loadUsers()">Given Hearts</button>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h3>{{likesParam === 'Likers' ? 'Received Hearts' : 'Given Hearts'}} : {{pagination.totalItems}}</h3>
+    </div>
+  </div>
+  <!-- List here -->
+
+  <hr>
+
+  <div class="row equal">
+    <div *ngFor="let user of users" class="col-xl-2 col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch no-overlap">
+      <app-member-card [user]="user"></app-member-card>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row d-flex">
+    <div class="col-lg-8">
+      <div class="text-center">
+        <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage" [(ngModel)]="pagination.currentPage"
+          (pageChanged)="pageChanged()" class="pagination-m" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+          lastText="&raquo;"></pagination>
+      </div>
+    </div>
+  </div>
+
+</div>

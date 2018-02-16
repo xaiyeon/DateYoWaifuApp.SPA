@@ -1,19 +1,20 @@
 <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark bg-black scrolling-navbar" [containerInside]="false">
   <logo>
     <a class="logo navbar-brand" [routerLink]="['/home']">
-      <strong>DateYoWaifu!</strong>
+      <strong>MyWaifuOnline!</strong>
     </a>
   </logo>
   <links class="align-middle">
     <ul class="navbar-nav mr-auto">
+      <!-- Users will be able to view non-member accounts -->
       <li class="nav-item active waves-light" mdbRippleRadius routerLinkActive="active">
         <a [routerLink]="['/waifus']" class="nav-link">Waifus</a>
       </li>
       <li class="nav-item waves-light" mdbRippleRadius *ngIf="loggedIn()" routerLinkActive="active">
-        <a [routerLink]="['/members']" class="nav-link">Matches</a>
+        <a [routerLink]="['/members']" class="nav-link">Members</a>
       </li>
       <li class="nav-item waves-light" mdbRippleRadius *ngIf="loggedIn()" routerLinkActive="active">
-        <a [routerLink]="['/lists']" routerLinkActive="router-link-active" class="nav-link">Lists</a>
+        <a [routerLink]="['/hearts']" routerLinkActive="router-link-active" class="nav-link">Hearts</a>
       </li>
       <li class="nav-item waves-light" mdbRippleRadius *ngIf="loggedIn()" routerLinkActive="active">
         <a [routerLink]="['/messages']" class="nav-link">Messages</a>
@@ -48,8 +49,8 @@
         </a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
           <a class="dropdown-item" [routerLink]="['/member/edit']">Edit Profile</a>
-          <a (click)="logout()" class="dropdown-item" href="#">Logout</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a (click)="logout()" class="dropdown-item">Logout</a>
+          <a class="dropdown-item" >Something else here</a>
         </div>
       </li>
     </ul>

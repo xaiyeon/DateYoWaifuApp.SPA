@@ -1,0 +1,75 @@
+<hr>
+
+<div class="text-center" *ngIf="messages?.length === 0">
+  <p>
+    <strong>No chat going on yet... Say hi below!</strong>
+  </p>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 ">
+    <div class="card dyw-chat-window">
+      <div class="card-body">
+        <ul class="list-unstyled" *ngFor="let message of messages">
+
+          <!-- to them -->
+          <li class="media" *ngIf="message.senderId == userId">
+            <img data-balloon="{{message.recipientKnownAs}}" data-balloon-pos="right" class="mr-3 text-left img-fluid img-thumbnail circle dyw-img"
+              src="{{message.senderPhotoUrl ? message.senderPhotoUrl : '../../../assets/images/user_def.gif '}}" alt="{{message.senderPhotoUrl}}">
+            <div class="media-body dyw-chat-message dyw-receiver">
+              <div class="media-body">
+                <h5 class="mt-0"></h5>
+                <p>{{message.content}}</p>
+                <hr>
+                <div class="row d-flex">
+                  <div class="col text-left">
+                      <strong>{{message.senderKnownAs | shortenChat}}</strong>
+                  </div>
+                  <div class="col text-right">
+                    <span class="fa fa-clock-o"> {{message.dateSent | timeAgo}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- to myself -->
+
+          <li class="media" *ngIf="message.senderId != userId">
+            <div class="media-body dyw-chat-message dyw-sender">
+              <h5 class="mt-0 mb-1"></h5>
+              <p>{{message.content}}</p>
+              <hr>
+              <div class="row d-flex">
+                <div class="col">
+                  <span class="fa fa-clock-o"> {{message.dateSent | timeAgo}}</span>
+                  <span *ngIf="!message.isRead" class="text-danger text-muted">(Unread)</span>
+                  <span *ngIf="message.isRead" class="text-success text-muted">(Read {{message.dateRead | timeAgo}} )</span>
+                </div>
+                <div class="col text-right">
+                    <strong>{{message.senderKnownAs | shortenChat}}</strong>
+                </div>
+              </div>
+
+            </div>
+            <img data-balloon="{{message.senderKnownAs}}" data-balloon-pos="left" class="ml-3 text-right img-fluid img-thumbnail circle dyw-img"
+            src="{{message.senderPhotoUrl ? message.senderPhotoUrl : '../../../assets/images/user_def.gif '}}" alt="{{message.senderKnownAs}}">
+          </li>
+
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <div class="card-footer ">
+      <form #messageForm="ngForm" (ngSubmit)="messageForm.valid && sendMessage()">
+        <div class="input-group">
+          <textarea class="form-control" id="" rows="10" placeholder="send a private message" required name="content" [(ngModel)]="newMessage.content"></textarea>
+          <!-- <input type="text" class="form-control" placeholder="send a private message"> -->
+          <span class="input-group-btn">
+            <button class="btn btn-primary btn-sm" [disabled]="messageForm.invalid">Send</button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
